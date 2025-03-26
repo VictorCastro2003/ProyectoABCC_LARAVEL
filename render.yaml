@@ -1,8 +1,20 @@
 services:
-  - type: web
-    name: laravel-app
-    env: php
-    buildCommand: |
-      composer install --no-dev --optimize-autoloader
+  - type: web  # Tipo de servicio (obligatorio)
+    name: laravel-app  # Nombre de tu app
+    env: php  # Forzar entorno PHP
+    region: ohio  # Región recomendada (opcional)
+    buildCommand: |  # Comandos para instalar dependencias
+      composer install --no-interaction --no-dev --prefer-dist
       php artisan key:generate --force
-    startCommand: php artisan serve --host=0.0.0.0 --port=${PORT}
+      php artisan storage:link
+      php artisan optimize:clear
+    startCommand: php artisan serve --host=0.0.0.0 --port=${PORT}  # Iniciar Laravel
+    envVars:  # Variables de entorno clave
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true  # Render genera una automáticamente
+      - key: APP_DEBUG
+        value: false
+      - key: LOG_CHANNEL
+        value: stderr

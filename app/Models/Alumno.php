@@ -17,6 +17,7 @@
             'Semestre',
             'Carrera',
         ];
+        public $timestamps = false;
     
     }
 

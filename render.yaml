@@ -2,10 +2,29 @@ services:
   - type: web
     name: proyecto-abcc
     runtime: php
+    phpVersion: 8.2
     buildCommand: |
-      chmod -R 755 storage bootstrap/cache
-      composer install --optimize-autoloader --no-dev
+      # Instalar dependencias PHP y Node.js
+      sudo apt-get update
+      sudo apt-get install -y php php-cli php-mbstring php-zip unzip nodejs npm
+      
+      # Instalar dependencias frontend
+      npm install autoprefixer postcss tailwindcss --save-dev
+      
+      # Composer y Laravel
+      curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+      /usr/local/bin/composer install --optimize-autoloader --no-dev
+      
+      # Build de assets
+      npm install
+      npm run build
+      
+      # Cache de Laravel
       php artisan config:cache
       php artisan route:cache
       php artisan view:cache
-    startCommand: php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+      
+      # Permisos
+      chmod -R 755 storage bootstrap/cache
+
+    startCommand: /usr/bin/php8.2 artisan serve --host=0.0.0.0 --port=${PORT:-8000}

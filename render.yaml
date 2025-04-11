@@ -4,19 +4,21 @@ services:
     runtime: php
     phpVersion: 8.2
     buildCommand: |
-      # Instalar dependencias PHP y Node.js
-      sudo apt-get update
-      sudo apt-get install -y php php-cli php-mbstring php-zip unzip nodejs npm
+      # Instalar Node.js y npm
+      curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+      sudo apt-get install -y nodejs
       
       # Instalar dependencias frontend
-      npm install autoprefixer postcss tailwindcss --save-dev
+      cd /opt/render/project/src
+      npm install -g npm@latest
+      npm install tailwindcss postcss autoprefixer --save-dev
+      npm install
       
       # Composer y Laravel
       curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
       /usr/local/bin/composer install --optimize-autoloader --no-dev
       
       # Build de assets
-      npm install
       npm run build
       
       # Cache de Laravel

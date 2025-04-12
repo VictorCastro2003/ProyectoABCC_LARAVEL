@@ -9,4 +9,17 @@ services:
       - key: APP_DEBUG
         value: false
       - key: APP_KEY
-        value: rO8k2KG5VpoxcdXaBSrepPM8l8ISOgLQQXsUAxhPZGA=  # sin "<>" ni comentario
+        value: rO8k2KG5VpoxcdXaBSrepPM8l8ISOgLQQXsUAxhPZGA= 
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: btldotgudhylexb18sey-mysql.services.clever-cloud.com
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        value: btldotgudhylexb18sey
+      - key: DB_USERNAME
+        value: uver4zyp7czemcjo
+      - key: DB_PASSWORD
+        value: 3RVgPRApcLX9SlcwepRe
+

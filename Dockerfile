@@ -1,7 +1,6 @@
-# Usa una imagen oficial de PHP como base
 FROM php:8.2-fpm
 
-# Instala dependencias adicionales para Laravel y Node.js
+# Instala dependencias para Laravel y Node.js
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg62-turbo-dev \
@@ -15,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql zip
 
-# Instala Node.js 18.x (estable) y npm
+# Instala Node.js 18.x (estable)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
 
@@ -25,18 +24,17 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Establece el directorio de trabajo
 WORKDIR /var/www
 
-# Copia el archivo composer.json y realiza la instalación de dependencias de Composer
-COPY composer.json composer.lock ./
-RUN composer install --no-autoloader --no-scripts
-
-# Copia el código fuente de la aplicación
+# Copia todo el código fuente
 COPY . .
 
-# Instala las dependencias de Node.js
+# Instala dependencias de PHP (ahora que ya copiaste todo)
+RUN composer install --optimize-autoloader --no-dev
+
+# Instala dependencias de Node.js
 RUN npm install && npm run build
 
 # Expone el puerto 8000
 EXPOSE 8000
 
-# Inicia el servidor PHP
+# Comando de inicio
 CMD php artisan serve --host=0.0.0.0 --port=8000

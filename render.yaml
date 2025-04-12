@@ -2,12 +2,11 @@ services:
   - type: web
     name: proyecto-abcc-laravel
     env: docker
-    buildCommand: docker build -t proyecto-abcc-laravel .
-    startCommand: docker run -p $PORT:80 proyecto-abcc-laravel
+    dockerfilePath: ./Dockerfile  # Render detectará y usará automáticamente este Dockerfile
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
       - key: APP_KEY
-        value: <rO8k2KG5VpoxcdXaBSrepPM8l8ISOgLQQXsUAxhPZGA=>  # Usa tu clave de aplicación aquí
+        value: rO8k2KG5VpoxcdXaBSrepPM8l8ISOgLQQXsUAxhPZGA=  # sin "<>" ni comentario

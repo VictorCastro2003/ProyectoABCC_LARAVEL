@@ -35,6 +35,7 @@ RUN npm install && npm run build
 
 # Expone el puerto 8000
 EXPOSE 8000
+RUN php artisan config:cache && php artisan migrate --force
 
 # Comando de inicio
 CMD php artisan serve --host=0.0.0.0 --port=8000

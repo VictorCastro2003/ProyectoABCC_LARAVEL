@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: proyecto-abcc
+    runtime: php
+    phpVersion: 8.2
+    buildCommand: |
+      # Instalar Node.js y npm
+      curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+      sudo apt-get install -y nodejs
+      
+      # Instalar dependencias frontend
+      cd /opt/render/project/src
+      npm install -g npm@latest
+      npm install tailwindcss postcss autoprefixer --save-dev
+      npm install
+      
+      # Composer y Laravel
+      curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+      /usr/local/bin/composer install --optimize-autoloader --no-dev
+      
+      # Build de assets
+      npm run build
+      
+      # Cache de Laravel
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+      
+      # Permisos
+      chmod -R 755 storage bootstrap/cache
+
+    startCommand: /usr/bin/php8.2 artisan serve --host=0.0.0.0 --port=${PORT:-8000}

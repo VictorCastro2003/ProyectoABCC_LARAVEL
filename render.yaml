@@ -5,6 +5,7 @@ services:
     buildCommand: |
       apt-get update
       apt-get install -y php8.2 php8.2-cli php8.2-fpm php8.2-mbstring php8.2-xml php8.2-mysql php8.2-zip
+      php -v  # Verifica la versión de PHP
       curl -sS https://getcomposer.org/installer | php
       mv composer.phar /usr/local/bin/composer
       npm install
@@ -13,11 +14,12 @@ services:
       php artisan migrate --force
       php artisan key:generate
       php artisan config:cache
-      php artisan serve --host=0.0.0.0 --port=$PORT
+      php-fpm -D   # Inicia el servidor PHP-FPM
+      nginx -g 'daemon off;'  # Inicia nginx (si usas nginx)
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
       - key: APP_KEY
-        value: <rO8k2KG5VpoxcdXaBSrepPM8l8ISOgLQQXsUAxhPZGA=>
+        value: <rO8k2KG5VpoxcdXaBSrepPM8l8ISOgLQQXsUAxhPZGA=>  # Escapa cualquier carácter especial si es necesario

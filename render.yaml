@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: proyecto-abcc-laravel
+    name: ProyectoABCC_LARAVEL
     env: docker
     dockerfilePath: ./Dockerfile  # Render detectará y usará automáticamente este Dockerfile
     envVars:

@@ -13,7 +13,7 @@
     'nombre',
     'primerAp',
     'segundoAp',
-    'fechaMac',
+    'fechaNac',
     'semestre',
     'carrera'
 ];

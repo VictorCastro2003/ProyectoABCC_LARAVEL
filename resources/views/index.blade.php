@@ -1,32 +1,57 @@
-@extends('adminlte::page')
-
-@section('title', 'Listado de Alumnos')
-
-@section('content_header')
-    <h1 class="m-0 text-dark">SERVICIOS ESCOLARES - Listado de Alumnos</h1>
-@stop
-
-@section('content')
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col-md-6">
-                    <h3 class="card-title">Alumnos Registrados</h3>
-                </div>
-                <div class="col-md-6 text-right">
-                    <a href="{{ route('alumnos.create') }}" class="btn btn-success">
-                        <i class="fas fa-plus"></i> AGREGAR ALUMNO
-                    </a>
-                </div>
-            </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Alumnos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .page-header {
+            margin-bottom: 30px;
+        }
+        .action-buttons .btn {
+            margin: 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-center">SERVICIOS ESCOLARES</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item">Inicio</li>
+                    <li class="breadcrumb-item active" aria-current="page">Alumnos</li>
+                </ol>
+            </nav>
         </div>
-        
-        <div class="card-body">
+
+        <div class="table-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Listado de Alumnos</h2>
+                <a href="{{ route('alumnos.create') }}" class="btn btn-success">
+                    <i class="fas fa-plus"></i> AGREGAR
+                </a>
+            </div>
+
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover">
-                    <thead class="thead-dark">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="table-dark">
                         <tr>
-                            <th>N° Control</th>
+                            <th>Número de Control</th>
                             <th>Nombre</th>
                             <th>Primer Apellido</th>
                             <th>Segundo Apellido</th>
@@ -40,7 +65,7 @@
                             <td>{{ $alumno->Nombre }}</td>
                             <td>{{ $alumno->Primer_Ap }}</td>
                             <td>{{ $alumno->Segundo_Ap }}</td>
-                            <td style="white-space: nowrap;">
+                            <td class="action-buttons">
                                 <a href="{{ route('alumnos.show', $alumno->Num_Control) }}" 
                                    class="btn btn-sm btn-primary" title="Ver detalle">
                                     <i class="fas fa-eye"></i>
@@ -64,50 +89,35 @@
                 </table>
             </div>
         </div>
-        
-        <div class="card-footer clearfix">
-            {{ $alumnos->links() }} <!-- Paginación -->
-        </div>
     </div>
-@stop
 
-@section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .table th {
-            background-color: #f8f9fa;
-            vertical-align: middle;
-        }
-        .card-title {
-            margin-bottom: 0;
-        }
-        .form-eliminar {
-            display: inline-block;
-        }
-    </style>
-@stop
-
-@section('js')
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).ready(function() {
-            $('.form-eliminar').on('submit', function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: '¿Eliminar alumno?',
-                    text: "¡Esta acción no se puede deshacer!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.submit();
-                    }
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('.form-eliminar');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    Swal.fire({
+                        title: '¿Eliminar registro?',
+                        text: "¡Esta acción no se puede deshacer!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
                 });
             });
         });
     </script>
-@stop
+</body>
+</html>

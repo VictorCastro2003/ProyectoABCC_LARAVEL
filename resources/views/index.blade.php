@@ -76,9 +76,6 @@
                     <td>{{ $alumno->nombre }}</td>
                     <td>{{ $alumno->primerAp }}</td>
                     <td>{{ $alumno->segundoAp }}</td>
-                    <td>{{ $alumno->fechaMac }}</td>
-                    <td>{{ $alumno->semestre }}</td>
-                    <td>{{ $alumno->carrera }}</td>
                     <td>
                         <div class="btn-group">
                             <a href="{{ route('alumnos.show', $alumno->id) }}" class="btn btn-sm btn-info">

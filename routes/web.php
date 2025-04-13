@@ -10,3 +10,4 @@ Route::get('/', function () {
 });
 
 
+Route::resource('alumnos', AlumnoController::class);

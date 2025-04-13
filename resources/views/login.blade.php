@@ -31,26 +31,30 @@
     </style>
 </head>
 <body>
-      <div class="demo-credentials">
-                <h5 class="text-primary">Credenciales de Prueba:</h5>
-                <p><strong>Usuario:</strong> admin</p>
-                <p><strong>Contraseña:</strong> admin123</p>
-            </div>
     <div class="container">
         <div class="login-container">
             <h2 class="text-center mb-4">Iniciar Sesión</h2>
 
             <!-- Credenciales estáticas de demostración -->
-          
+            <div class="demo-credentials">
+                <h5 class="text-primary">Credenciales de Prueba:</h5>
+                <p><strong>Usuario:</strong> admin</p>
+                <p><strong>Contraseña:</strong> admin123</p>
+            </div>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
-                    {{ $errors->first() }}
+                    @if($errors->has('csrf'))
+                        <strong>Error de sesión:</strong> Por favor recarga la página e intenta nuevamente
+                    @else
+                        {{ $errors->first() }}
+                    @endif
                 </div>
             @endif
 
             <form method="POST" action="{{ route('login') }}">
-                @csrf
+                <!-- Token CSRF explícito con atributo value -->
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="mb-3">
                     <label for="username" class="form-label">Nombre de usuario</label>
@@ -76,13 +80,12 @@
         </div>
     </div>
 
-    <!-- Font Awesome para el ícono del ojo -->
+    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Script para mostrar/ocultar contraseña -->
     <script>
         function togglePassword() {
             const passwordInput = document.getElementById('password');
@@ -95,6 +98,11 @@
                 passwordInput.type = 'password';
                 icon.classList.replace('fa-eye-slash', 'fa-eye');
             }
+        }
+
+        // Forzar recarga de la página si se detecta error CSRF
+        if(window.location.search.includes('csrf_error=1')) {
+            window.location.href = window.location.pathname;
         }
     </script>
 </body>

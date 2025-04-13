@@ -76,46 +76,46 @@
             <i class="bi bi-person-badge"></i> Información del Alumno
           </h3>
           
-          <div class="row">
-            <div class="col-md-6">
-              <div class="detail-item">
-                <h5 class="detail-label"><i class="bi bi-card-heading"></i> Número de Control</h5>
-                <p class="detail-value">{{ $alumno->Num_Control }}</p>
-              </div>
-              
-              <div class="detail-item">
-                <h5 class="detail-label"><i class="bi bi-person"></i> Nombre</h5>
-                <p class="detail-value">{{ $alumno->Nombre }}</p>
-              </div>
-              
-              <div class="detail-item">
-                <h5 class="detail-label"><i class="bi bi-person"></i> Primer Apellido</h5>
-                <p class="detail-value">{{ $alumno->Primer_Ap }}</p>
-              </div>
-            </div>
-            
-            <div class="col-md-6">
-              <div class="detail-item">
-                <h5 class="detail-label"><i class="bi bi-person"></i> Segundo Apellido</h5>
-                <p class="detail-value">{{ $alumno->Segundo_Ap }}</p>
-              </div>
-              
-              <div class="detail-item">
-                <h5 class="detail-label"><i class="bi bi-calendar"></i> Fecha de Nacimiento</h5>
-                <p class="detail-value">{{ date('d/m/Y', strtotime($alumno->Fecha_Nac)) }}</p>
-              </div>
-              
-              <div class="detail-item">
-                <h5 class="detail-label"><i class="bi bi-mortarboard"></i> Semestre</h5>
-                <p class="detail-value">{{ $alumno->Semestre }}</p>
-              </div>
-              
-              <div class="detail-item">
-                <h5 class="detail-label"><i class="bi bi-book"></i> Carrera</h5>
-                <p class="detail-value">{{ $alumno->Carrera }}</p>
-              </div>
-            </div>
-          </div>
+         <div class="row">
+  <div class="col-md-6">
+    <div class="detail-item">
+      <h5 class="detail-label"><i class="bi bi-card-heading"></i> Número de Control</h5>
+      <p class="detail-value">{{ $alumno->numControl }}</p>
+    </div>
+
+    <div class="detail-item">
+      <h5 class="detail-label"><i class="bi bi-person"></i> Nombre</h5>
+      <p class="detail-value">{{ $alumno->nombre }}</p>
+    </div>
+
+    <div class="detail-item">
+      <h5 class="detail-label"><i class="bi bi-person"></i> Primer Apellido</h5>
+      <p class="detail-value">{{ $alumno->primerAp }}</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="detail-item">
+      <h5 class="detail-label"><i class="bi bi-person"></i> Segundo Apellido</h5>
+      <p class="detail-value">{{ $alumno->segundoAp }}</p>
+    </div>
+
+    <div class="detail-item">
+      <h5 class="detail-label"><i class="bi bi-calendar"></i> Fecha de Nacimiento</h5>
+      <p class="detail-value">{{ date('d/m/Y', strtotime($alumno->fechaMac)) }}</p>
+    </div>
+
+    <div class="detail-item">
+      <h5 class="detail-label"><i class="bi bi-mortarboard"></i> Semestre</h5>
+      <p class="detail-value">{{ $alumno->semestre }}</p>
+    </div>
+
+    <div class="detail-item">
+      <h5 class="detail-label"><i class="bi bi-book"></i> Carrera</h5>
+      <p class="detail-value">{{ $alumno->carrera }}</p>
+    </div>
+  </div>
+</div>
           
           <div class="text-center mt-4">
             <a href="/alumnos" class="btn btn-outline-secondary">

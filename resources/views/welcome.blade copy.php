@@ -39,7 +39,7 @@
             <div class="demo-credentials">
                 <h5 class="text-primary">Credenciales de Prueba:</h5>
                 <p><strong>Usuario:</strong> admin</p>
-                <p><strong>Contraseña:</strong> admin123</p>
+                <p><strong>Contraseña:</strong> admin</p>
             </div>
 
             @if ($errors->any())

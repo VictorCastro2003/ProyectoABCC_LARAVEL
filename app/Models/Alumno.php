@@ -8,15 +8,15 @@
     class Alumno extends Model{
         use HasFactory;
 
-        protected $fillable = [
-            'Num_Control',
-            'Nombre',
-            'Primer_Ap',
-            'Segundo_Ap',
-            'Fecha_Nac',
-            'Semestre',
-            'Carrera',
-        ];
+        protected protected $fillable = [
+    'numControl',
+    'nombre',
+    'primerAp',
+    'segundoAp',
+    'fechaMac',
+    'semestre',
+    'carrera'
+];
         public $timestamps = false;
     
     }

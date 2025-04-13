@@ -8,7 +8,7 @@
     class Alumno extends Model{
         use HasFactory;
 
-        protected protected $fillable = [
+     protected $fillable = [
     'numControl',
     'nombre',
     'primerAp',

@@ -9,11 +9,6 @@ Route::get('/', function () {
    return redirect('/alumnos');
 });
 
-// Rutas de autenticación
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
 // Rutas protegidas
 Route::middleware('auth')->group(function () {
     Route::resource('alumnos', AlumnoController::class);

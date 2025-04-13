@@ -74,7 +74,9 @@
 
         <form method="POST" action="/login">
             @csrf
-            
+
+            <h5>Usuario: admin</h5>
+            <h5>Contraseña: admin</h5>
             <div class="form-group">
                 <label for="username">Nombre de usuario</label>
                 <input type="text" id="username" name="username" required>

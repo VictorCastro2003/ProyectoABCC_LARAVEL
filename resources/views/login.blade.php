@@ -4,96 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            background-color: #f8f9fa;
         }
         .login-container {
-            background-color: white;
+            max-width: 400px;
+            margin: 100px auto;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            text-align: center;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
         }
-        h1 {
-            color: #333;
-            margin-bottom: 25px;
-        }
-        .form-group {
+        .demo-credentials {
+            background-color: #e7f5ff;
+            border-left: 4px solid #228be6;
+            padding: 15px;
             margin-bottom: 20px;
-            text-align: left;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-        }
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
             border-radius: 4px;
-            box-sizing: border-box;
         }
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .checkbox-group input {
-            margin-right: 10px;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #4285f4;
-            color: white;
-            border: none;
-            border-radius: 4px;
+        .password-toggle {
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        button:hover {
-            background-color: #3367d6;
+            color: #228be6;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1>Iniciar Sesión</h1>
+    <div class="container">
+        <div class="login-container">
+            <h2 class="text-center mb-4">Iniciar Sesión</h2>
 
-        <form method="POST" action="/login">
-            @csrf
-
-            <h5>Usuario: admin</h5>
-            <h5>Contraseña: admin</h5>
-            <div class="form-group">
-                <label for="username">Nombre de usuario</label>
-                <input type="text" id="username" name="username" required>
+            <!-- Credenciales estáticas de demostración -->
+            <div class="demo-credentials">
+                <h5 class="text-primary">Credenciales de Prueba:</h5>
+                <p><strong>Usuario:</strong> admin</p>
+                <p><strong>Contraseña:</strong> admin123</p>
             </div>
 
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" required>
-            </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    {{ $errors->first() }}
+                </div>
+            @endif
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="remember" name="remember">
-                <label for="remember">Recuérdame</label>
-            </div>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
 
-            <button type="submit">Entrar</button>
-        </form>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nombre de usuario</label>
+                    <input type="text" class="form-control" id="username" name="username" 
+                           value="{{ old('username') }}" required autofocus placeholder="Ej: admin">
+                </div>
+
+                <div class="mb-3 position-relative">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required placeholder="Ej: admin123">
+                    <span class="position-absolute top-50 end-0 translate-middle-y me-2 password-toggle" onclick="togglePassword()">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                    <label class="form-check-label" for="remember">Recuérdame</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+            </form>
+        </div>
     </div>
+
+    <!-- Font Awesome para el ícono del ojo -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para mostrar/ocultar contraseña -->
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.querySelector('.password-toggle i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+    </script>
 </body>
 </html>

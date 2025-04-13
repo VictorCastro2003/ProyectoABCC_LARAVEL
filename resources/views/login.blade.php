@@ -38,6 +38,9 @@
             color: #4285f4;
             font-size: 16px;
         }
+        .demo-credentials p {
+            margin: 5px 0;
+        }
         .error-message {
             color: #d9534f;
             background-color: #f8d7da;
@@ -99,10 +102,12 @@
     <div class="login-container">
         <h2>Iniciar sesión</h2>
 
+ 
         <div class="demo-credentials">
-            <h3>Credenciales para pruebas:</h3>
+            <h3>Credenciales de prueba:</h3>
             <p><strong>Usuario:</strong> admin</p>
             <p><strong>Contraseña:</strong> admin</p>
+            <p><small>Estas credenciales son solo para fines de demostración</small></p>
         </div>
 
         @if ($errors->any())
@@ -116,13 +121,13 @@
             
             <div class="form-group">
                 <label for="name">Usuario:</label>
-                <input type="text" id="name" name="name" required placeholder="Ej: profesor">
+                <input type="text" id="name" name="name" required placeholder="Ingrese admin">
             </div>
 
             <div class="form-group">
                 <label for="password">Contraseña:</label>
                 <div class="password-container">
-                    <input type="password" id="password" name="password" required placeholder="Ej: prueba123">
+                    <input type="password" id="password" name="password" required placeholder="Ingrese admin123">
                     <span class="toggle-password" onclick="togglePassword()">Mostrar</span>
                 </div>
             </div>

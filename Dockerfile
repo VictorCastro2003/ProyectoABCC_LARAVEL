@@ -27,7 +27,12 @@ WORKDIR /var/www
 # Copia todo el código fuente
 COPY . .
 
-# Instala dependencias de PHP (ahora que ya copiaste todo)
+# Instala AdminLTE y dependencias
+RUN composer require jeroennoten/laravel-adminlte \
+    && php artisan adminlte:install \
+    && php artisan adminlte:plugins install
+
+# Instala dependencias de PHP
 RUN composer install --optimize-autoloader --no-dev
 
 # Instala dependencias de Node.js
@@ -35,7 +40,12 @@ RUN npm install && npm run build
 
 # Expone el puerto 8000
 EXPOSE 8000
-RUN php artisan config:cache && php artisan migrate --force
+
+# Configuración final
+RUN php artisan config:clear \
+    && php artisan cache:clear \
+    && php artisan view:clear \
+    && php artisan migrate --force
 
 # Comando de inicio
 CMD php artisan serve --host=0.0.0.0 --port=8000

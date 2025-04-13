@@ -102,7 +102,7 @@
 
     <div class="detail-item">
       <h5 class="detail-label"><i class="bi bi-calendar"></i> Fecha de Nacimiento</h5>
-      <p class="detail-value">{{ date('d/m/Y', strtotime($alumno->fechaMac)) }}</p>
+      <p class="detail-value">{{ date('d/m/Y', strtotime($alumno->fechaNac)) }}</p>
     </div>
 
     <div class="detail-item">

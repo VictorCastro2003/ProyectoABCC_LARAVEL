@@ -9,7 +9,4 @@ Route::get('/', function () {
    return redirect('/alumnos');
 });
 
-// Rutas protegidas
-Route::middleware('auth')->group(function () {
-    Route::resource('alumnos', AlumnoController::class);
-});
+

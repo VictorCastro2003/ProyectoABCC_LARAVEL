@@ -49,78 +49,79 @@
       <div class="col-md-8">
         <div class="p-4 shadow-lg bg-white rounded">
           <h2 class="mb-4 text-center">NUEVO ALUMNO</h2>
-          <form id="formulario-alta" method="POST" action="/alumnos" autocomplete="off">
-            @csrf
-            <div class="mb-3">
-              <label for="Num_Control" class="form-label">Número de Control</label>
-              <input type="text" class="form-control @error('Num_Control') is-invalid @enderror" name="Num_Control" id="Num_Control" value="{{ old('Num_Control') }}" placeholder="Ej. 21070010" required>
-              @error('Num_Control')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
+         <form id="formulario-alta" method="POST" action="/alumnos" autocomplete="off">
+  @csrf
 
-            <div class="mb-3">
-              <label for="Nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control @error('Nombre') is-invalid @enderror" name="Nombre" id="Nombre" value="{{ old('Nombre') }}" placeholder="Ej. Juan" required>
-              @error('Nombre')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
+  <div class="mb-3">
+    <label for="numControl" class="form-label">Número de Control</label>
+    <input type="text" class="form-control @error('numControl') is-invalid @enderror" name="numControl" id="numControl" value="{{ old('numControl') }}" placeholder="Ej. 21070010" required>
+    @error('numControl')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="Primer_Ap" class="form-label">Primer Apellido</label>
-                <input type="text" class="form-control @error('Primer_Ap') is-invalid @enderror" name="Primer_Ap" id="Primer_Ap" value="{{ old('Primer_Ap') }}" placeholder="Ej. Pérez" required>
-                @error('Primer_Ap')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="Segundo_Ap" class="form-label">Segundo Apellido</label>
-                <input type="text" class="form-control @error('Segundo_Ap') is-invalid @enderror" name="Segundo_Ap" id="Segundo_Ap" value="{{ old('Segundo_Ap') }}" placeholder="Ej. Gómez">
-                @error('Segundo_Ap')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-              </div>
-            </div>
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre</label>
+    <input type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre" value="{{ old('nombre') }}" placeholder="Ej. Juan" required>
+    @error('nombre')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
 
-            <div class="mb-3">
-              <label for="Fecha_Nac" class="form-label">Fecha de Nacimiento</label>
-              <input type="date" class="form-control @error('Fecha_Nac') is-invalid @enderror" name="Fecha_Nac" id="Fecha_Nac" value="{{ old('Fecha_Nac') }}" required>
-              @error('Fecha_Nac')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="primerAp" class="form-label">Primer Apellido</label>
+      <input type="text" class="form-control @error('primerAp') is-invalid @enderror" name="primerAp" id="primerAp" value="{{ old('primerAp') }}" placeholder="Ej. Pérez" required>
+      @error('primerAp')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="segundoAp" class="form-label">Segundo Apellido</label>
+      <input type="text" class="form-control @error('segundoAp') is-invalid @enderror" name="segundoAp" id="segundoAp" value="{{ old('segundoAp') }}" placeholder="Ej. Gómez">
+      @error('segundoAp')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+  </div>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="Semestre" class="form-label">Semestre</label>
-                <input type="number" class="form-control @error('Semestre') is-invalid @enderror" name="Semestre" id="Semestre" min="1" max="12" value="{{ old('Semestre') }}" placeholder="Ej. 3" required>
-                @error('Semestre')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="Carrera" class="form-label">Carrera</label>
-                <select name="Carrera" id="Carrera" class="form-select @error('Carrera') is-invalid @enderror" required>
-                  <option disabled {{ old('Carrera') ? '' : 'selected' }}>Selecciona una carrera...</option>
-                  <option {{ old('Carrera') == 'Ingeniería en Sistemas' ? 'selected' : '' }}>Ingeniería en Sistemas</option>
-                  <option {{ old('Carrera') == 'Administración de Empresas' ? 'selected' : '' }}>Administración de Empresas</option>
-                  <option {{ old('Carrera') == 'Contaduría' ? 'selected' : '' }}>Contaduría</option>
-                  <option {{ old('Carrera') == 'Ingeniería Mecatrónica' ? 'selected' : '' }}>Ingeniería Mecatrónica</option>
-                  <option {{ old('Carrera') == 'Otra...' ? 'selected' : '' }}>Otra...</option>
-                </select>
-                @error('Carrera')
-                  <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-              </div>
-            </div>
+  <div class="mb-3">
+    <label for="fechaNac" class="form-label">Fecha de Nacimiento</label>
+    <input type="date" class="form-control @error('fechaNac') is-invalid @enderror" name="fechaNac" id="fechaNac" value="{{ old('fechaNac') }}" required>
+    @error('fechaNac')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
 
-            <div class="text-center">
-              <button type="button" class="btn btn-success w-50" onclick="confirmarEnvio()">Guardar</button>
-              <a href="/alumnos" class="btn btn-warning w-50 mt-2">Cancelar</a>
-            </div>
-          </form>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="semestre" class="form-label">Semestre</label>
+      <input type="number" class="form-control @error('semestre') is-invalid @enderror" name="semestre" id="semestre" min="1" max="12" value="{{ old('semestre') }}" placeholder="Ej. 3" required>
+      @error('semestre')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="carrera" class="form-label">Carrera</label>
+      <select name="carrera" id="carrera" class="form-select @error('carrera') is-invalid @enderror" required>
+        <option disabled {{ old('carrera') ? '' : 'selected' }}>Selecciona una carrera...</option>
+        <option {{ old('carrera') == 'Ingeniería en Sistemas' ? 'selected' : '' }}>Ingeniería en Sistemas</option>
+        <option {{ old('carrera') == 'Administración de Empresas' ? 'selected' : '' }}>Administración de Empresas</option>
+        <option {{ old('carrera') == 'Contaduría' ? 'selected' : '' }}>Contaduría</option>
+        <option {{ old('carrera') == 'Ingeniería Mecatrónica' ? 'selected' : '' }}>Ingeniería Mecatrónica</option>
+        <option {{ old('carrera') == 'Otra...' ? 'selected' : '' }}>Otra...</option>
+      </select>
+      @error('carrera')
+        <div class="invalid-feedback">{{ $message }}</div>
+      @enderror
+    </div>
+  </div>
+
+  <div class="text-center">
+    <button type="button" class="btn btn-success w-50" onclick="confirmarEnvio()">Guardar</button>
+    <a href="/alumnos" class="btn btn-warning w-50 mt-2">Cancelar</a>
+  </div>
+</form>
         </div>
       </div>
     </div>

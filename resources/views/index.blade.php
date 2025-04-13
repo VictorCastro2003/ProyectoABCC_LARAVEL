@@ -63,9 +63,7 @@
                     <th>Nombre</th>
                     <th>Primer Apellido</th>
                     <th>Segundo Apellido</th>
-                    <th>Fecha</th>
-                    <th>Semestre</th>
-                    <th>Carrera</th>
+                    
                     <th>Acciones</th>
                 </tr>
             </thead>

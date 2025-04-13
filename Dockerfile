@@ -24,7 +24,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Establece el directorio de trabajo
 WORKDIR /var/www
 
-# Copia todo el código fuente
+# Copia todo el código fuente (incluyendo .env)
 COPY . .
 
 # Instala AdminLTE y dependencias
@@ -41,11 +41,10 @@ RUN npm install && npm run build
 # Expone el puerto 8000
 EXPOSE 8000
 
-# Configuración final
+# Configuración final (solo limpieza de cache, sin migraciones automáticas)
 RUN php artisan config:clear \
     && php artisan cache:clear \
-    && php artisan view:clear \
-    && php artisan migrate --force
+    && php artisan view:clear
 
 # Comando de inicio
 CMD php artisan serve --host=0.0.0.0 --port=8000

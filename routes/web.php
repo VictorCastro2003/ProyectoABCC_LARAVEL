@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 
 // Redirige al login como pantalla principal
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('alumnos');
 });
 
 // Rutas de autenticación

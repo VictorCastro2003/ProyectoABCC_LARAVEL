@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Alumno;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session; // Importación de Session
 
 class AlumnoController extends Controller
 {
@@ -16,21 +15,25 @@ class AlumnoController extends Controller
 
     public function store(Request $request)
     {
-        /*   $request->validate([
-            'caja_num_control'=>'required',
-            'caja_nombre'=>'required',
-            'caja_primer_ap'=>'required',
-        ]);*/
+        $request->validate([
+            'numControl' => 'required',
+            'nombre' => 'required',
+            'primerAp' => 'required',
+            'segundoAp' => 'required',
+            'fechaMac' => 'required|date',
+            'semestre' => 'required|numeric',
+            'carrera' => 'required'
+        ]);
 
-        Alumno::create($request->post());
-        return redirect()->route('alumnos.index')->with('exito', 'Agregado Correctamente!!!!!');
+        Alumno::create($request->all());
+        return redirect()->route('alumnos.index')->with('success', 'Alumno agregado correctamente');
     }
 
     // -------- BAJAS --------
     public function destroy(Alumno $alumno)
     {
         $alumno->delete();
-        return redirect()->route('alumnos.index')->with('exito', 'Eliminado Correctamente!!!!!');
+        return redirect()->route('alumnos.index')->with('success', 'Alumno eliminado correctamente');
     }
 
     // -------- CAMBIOS --------
@@ -39,21 +42,17 @@ class AlumnoController extends Controller
         return view('editar', compact('alumno'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Alumno $alumno)
     {
-        $alumno = Alumno::find($id);
+        $request->validate([
+            'numControl' => 'required',
+            'nombre' => 'required',
+            'primerAp' => 'required',
+            // ... otras validaciones
+        ]);
 
-        $alumno->Num_Control = $request->input('Num_Control');
-        $alumno->Nombre = $request->input('Nombre');
-        $alumno->Primer_Ap = $request->input('Primer_Ap');
-        $alumno->Segundo_Ap = $request->input('Segundo_Ap');
-        $alumno->Fecha_Nac = $request->input('Fecha_Nac');
-        $alumno->Semestre = $request->input('Semestre');
-        $alumno->Carrera = $request->input('Carrera');
-
-        $alumno->save();
-        Session::flash('message', 'MODIFICADO Correctamente !'); // Aquí estaba el error
-        return redirect()->route('alumnos.index');
+        $alumno->update($request->all());
+        return redirect()->route('alumnos.index')->with('success', 'Alumno actualizado correctamente');
     }
 
     // -------- CONSULTAS --------
@@ -63,9 +62,8 @@ class AlumnoController extends Controller
         return view('index', compact('alumnos'));
     }
 
-    public function show($num_control)
+    public function show(Alumno $alumno)
     {
-        $alumno = Alumno::where('Num_Control', $num_control)->firstOrFail();
         return view('detalle', compact('alumno'));
     }
 }

@@ -31,16 +31,17 @@
     </style>
 </head>
 <body>
+      <div class="demo-credentials">
+                <h5 class="text-primary">Credenciales de Prueba:</h5>
+                <p><strong>Usuario:</strong> admin</p>
+                <p><strong>Contraseña:</strong> admin123</p>
+            </div>
     <div class="container">
         <div class="login-container">
             <h2 class="text-center mb-4">Iniciar Sesión</h2>
 
             <!-- Credenciales estáticas de demostración -->
-            <div class="demo-credentials">
-                <h5 class="text-primary">Credenciales de Prueba:</h5>
-                <p><strong>Usuario:</strong> admin</p>
-                <p><strong>Contraseña:</strong> admin123</p>
-            </div>
+          
 
             @if ($errors->any())
                 <div class="alert alert-danger">

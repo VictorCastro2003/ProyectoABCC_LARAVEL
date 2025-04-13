@@ -9,12 +9,54 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome para íconos -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        .btn-action {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 3px;
+        }
+        .user-dropdown {
+            min-width: 200px;
+        }
+        .user-dropdown .dropdown-item {
+            padding: 0.5rem 1.5rem;
+        }
+        .user-dropdown .dropdown-header {
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
 
 <header class="bg-primary text-white p-3">
-    <div class="container">
+    <div class="container d-flex justify-content-between align-items-center">
         <h1 class="mb-0">Dashboard - ALUMNOS</h1>
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle me-2 fs-4"></i>
+                <span>Usuario</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end user-dropdown" aria-labelledby="userDropdown">
+                <li><h6 class="dropdown-header">usuario@ejemplo.com</h6></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Perfil</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Configuración</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt me-2"></i> Cerrar sesión
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     </div>
 </header>
 
@@ -52,7 +94,9 @@
 
     <div class="mb-3 d-flex justify-content-between align-items-center">
         <h2>Listado de Alumnos</h2>
-        <a href="{{ route('alumnos.create') }}" class="btn btn-success">AGREGAR</a>
+        <a href="{{ route('alumnos.create') }}" class="btn btn-success">
+            <i class="fas fa-plus me-2"></i>AGREGAR
+        </a>
     </div>
 
     <div class="table-responsive">
@@ -63,7 +107,6 @@
                     <th>Nombre</th>
                     <th>Primer Apellido</th>
                     <th>Segundo Apellido</th>
-                    
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -75,17 +118,17 @@
                     <td>{{ $alumno->primerAp }}</td>
                     <td>{{ $alumno->segundoAp }}</td>
                     <td>
-                        <div class="btn-group">
-                            <a href="{{ route('alumnos.show', $alumno->id) }}" class="btn btn-sm btn-info">
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ route('alumnos.show', $alumno->id) }}" class="btn btn-info btn-action" title="Ver detalles">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="{{ route('alumnos.edit', $alumno->id) }}" class="btn btn-sm btn-warning">
+                            <a href="{{ route('alumnos.edit', $alumno->id) }}" class="btn btn-warning btn-action" title="Editar">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('alumnos.destroy', $alumno->id) }}" method="POST" class="form-eliminar">
+                            <form action="{{ route('alumnos.destroy', $alumno->id) }}" method="POST" class="form-eliminar d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">
+                                <button type="submit" class="btn btn-danger btn-action" title="Eliminar">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>

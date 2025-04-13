@@ -42,36 +42,50 @@
     <a href="{{ route('alumnos.create') }}" class="btn btn-success mt-4">AGREGAR</a>
     
     <div class="table-responsive mt-4">
-        <table class='table table-striped table-bordered text-center'>
-            <thead>
-                <tr>
-                    <th>Numero de Control</th>
-                    <th>Nombre</th>
-                    <th>Primer Ap</th>
-                    <th>Segundo Ap</th>
-                    <th>ACCIONES</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($alumnos as $alumno)
-                <tr>
-                    <td>{{ $alumno->Num_Control }}</td>
-                    <td>{{ $alumno->Nombre }}</td>
-                    <td>{{ $alumno->Primer_Ap }}</td>
-                    <td>{{ $alumno->Segundo_Ap }}</td>
-                    <td>
-                        <a href="{{ route('alumnos.show', $alumno->Num_Control) }}" class="btn btn-primary btn-sm">Detalle</a>
-                        <a href="{{ route('alumnos.edit', $alumno->Num_Control) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('alumnos.destroy', $alumno->id) }}" method="POST" style="display:inline;" class="form-eliminar">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+       <table class='table table-striped table-bordered text-center'>
+    <thead>
+        <tr>
+            <th>N° Control</th>
+            <th>Nombre</th>
+            <th>Primer Apellido</th>
+            <th>Segundo Apellido</th>
+            <th>Fecha</th>
+            <th>Semestre</th>
+            <th>Carrera</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($alumnos as $alumno)
+        <tr>
+            <td>{{ $alumno->numControl }}</td>
+            <td>{{ $alumno->nombre }}</td>
+            <td>{{ $alumno->primerAp }}</td>
+            <td>{{ $alumno->segundoAp }}</td>
+            <td>{{ $alumno->fechaMac }}</td>
+            <td>{{ $alumno->semestre }}</td>
+            <td>{{ $alumno->carrera }}</td>
+            <td>
+                <div class="btn-group">
+                    <a href="{{ route('alumnos.show', $alumno->id) }}" class="btn btn-sm btn-info">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="{{ route('alumnos.edit', $alumno->id) }}" class="btn btn-sm btn-warning">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form action="{{ route('alumnos.destroy', $alumno->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
     </div>
 @stop
 

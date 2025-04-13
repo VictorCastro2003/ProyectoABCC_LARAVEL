@@ -51,45 +51,45 @@
             @method('PUT')
 
             <div class="mb-3">
-              <label for="Num_Control" class="form-label">Número de Control</label>
-              <input class="form-control" name="Num_Control" type="text" id="Num_Control" value="{{ $alumno->Num_Control }}" required>
+              <label for="numControl" class="form-label">Número de Control</label>
+              <input class="form-control" name="numControl" type="text" id="numControl" value="{{ $alumno->numControl }}" required>
             </div>
 
             <div class="mb-3">
-              <label for="Nombre" class="form-label">Nombre</label>
-              <input class="form-control" name="Nombre" type="text" id="Nombre" value="{{ $alumno->Nombre }}" required>
+              <label for="nombre" class="form-label">Nombre</label>
+              <input class="form-control" name="nombre" type="text" id="nombre" value="{{ $alumno->nombre }}" required>
             </div>
 
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="Primer_Ap" class="form-label">Primer Apellido</label>
-                <input class="form-control" name="Primer_Ap" type="text" id="Primer_Ap" value="{{ $alumno->Primer_Ap }}" required>
+                <label for="primerAp" class="form-label">Primer Apellido</label>
+                <input class="form-control" name="primerAp" type="text" id="primerAp" value="{{ $alumno->primerAp }}" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="Segundo_Ap" class="form-label">Segundo Apellido</label>
-                <input class="form-control" name="Segundo_Ap" type="text" id="Segundo_Ap" value="{{ $alumno->Segundo_Ap }}" required>
+                <label for="segundoAp" class="form-label">Segundo Apellido</label>
+                <input class="form-control" name="segundoAp" type="text" id="segundoAp" value="{{ $alumno->segundoAp }}" required>
               </div>
             </div>
 
             <div class="mb-3">
-              <label for="Fecha_Nac" class="form-label">Fecha de Nacimiento</label>
-              <input class="form-control" name="Fecha_Nac" type="date" id="Fecha_Nac" value="{{ $alumno->Fecha_Nac }}" required>
+              <label for="fechaNac" class="form-label">Fecha de Nacimiento</label>
+              <input class="form-control" name="fechaNac" type="date" id="fechaNac" value="{{ $alumno->fechaNac }}" required>
             </div>
 
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="Semestre" class="form-label">Semestre</label>
-                <input class="form-control" name="Semestre" type="number" id="Semestre" min="1" max="12" value="{{ $alumno->Semestre }}" required>
+                <label for="semestre" class="form-label">Semestre</label>
+                <input class="form-control" name="semestre" type="number" id="semestre" min="1" max="12" value="{{ $alumno->semestre }}" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label for="Carrera" class="form-label">Carrera</label>
-                <select name="Carrera" id="Carrera" class="form-select" required>
+                <label for="carrera" class="form-label">Carrera</label>
+                <select name="carrera" id="carrera" class="form-select" required>
                   <option disabled>Selecciona una carrera...</option>
-                  <option value="Ingeniería en Sistemas" {{ $alumno->Carrera == 'Ingeniería en Sistemas' ? 'selected' : '' }}>Ingeniería en Sistemas</option>
-                  <option value="Administración de Empresas" {{ $alumno->Carrera == 'Administración de Empresas' ? 'selected' : '' }}>Administración de Empresas</option>
-                  <option value="Contaduría" {{ $alumno->Carrera == 'Contaduría' ? 'selected' : '' }}>Contaduría</option>
-                  <option value="Ingeniería Mecatrónica" {{ $alumno->Carrera == 'Ingeniería Mecatrónica' ? 'selected' : '' }}>Ingeniería Mecatrónica</option>
-                  <option value="Otra..." {{ $alumno->Carrera == 'Otra...' ? 'selected' : '' }}>Otra...</option>
+                  <option value="Ingeniería en Sistemas" {{ $alumno->carrera == 'Ingeniería en Sistemas' ? 'selected' : '' }}>Ingeniería en Sistemas</option>
+                  <option value="Administración de Empresas" {{ $alumno->carrera == 'Administración de Empresas' ? 'selected' : '' }}>Administración de Empresas</option>
+                  <option value="Contaduría" {{ $alumno->carrera == 'Contaduría' ? 'selected' : '' }}>Contaduría</option>
+                  <option value="Ingeniería Mecatrónica" {{ $alumno->carrera == 'Ingeniería Mecatrónica' ? 'selected' : '' }}>Ingeniería Mecatrónica</option>
+                  <option value="Otra..." {{ $alumno->carrera == 'Otra...' ? 'selected' : '' }}>Otra...</option>
                 </select>
               </div>
             </div>

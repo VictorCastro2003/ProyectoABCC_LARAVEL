@@ -36,11 +36,12 @@ RUN echo "CACHE_DRIVER=array" >> .env \
     && echo "SESSION_DRIVER=file" >> .env \
     && echo "QUEUE_CONNECTION=sync" >> .env
 
-# Instala AdminLTE y dependencias
-RUN composer require jeroennoten/laravel-adminlte \
-    && php artisan adminlte:install \
-    && php artisan adminlte:plugins install
-
+# Instala AdminLTE como usuario no-root
+RUN adduser --disabled-password --gecos '' laraveluser && \
+    chown -R laraveluser:laraveluser /var/www/html && \
+    su - laraveluser -c "composer require jeroennoten/laravel-adminlte" && \
+    su - laraveluser -c "php artisan adminlte:install" && \
+    su - laraveluser -c "php artisan adminlte:plugins install"
 # Instala dependencias de PHP
 RUN composer install --optimize-autoloader --no-dev
 

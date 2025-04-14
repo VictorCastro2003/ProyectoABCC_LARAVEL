@@ -19,8 +19,7 @@ Route::middleware('web')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::resource('alumnos', AlumnoController::class);
     });
-    Route::get('/refresh-csrf', function() {
-    return response()->json(['token' => csrf_token()]);
+
 });
 });
 

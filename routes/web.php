@@ -19,8 +19,6 @@ Route::middleware('web')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::resource('alumnos', AlumnoController::class);
     });
-
-});
 });
 
 

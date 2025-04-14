@@ -55,7 +55,7 @@
       @csrf
             <div class="mb-3">
                 <label for="username" class="form-label">Nombre de usuario</label>
-                <input type="text" class="form-control" id="username" name="username" required placeholder="Ej: admin">
+                <input type="text" class="form-control" id="name" name="name" required placeholder="Ej: admin">
             </div>
 
             <div class="mb-3">

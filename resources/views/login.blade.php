@@ -34,6 +34,21 @@
         }
     </style>
 </head>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Actualiza el token CSRF cada 30 minutos
+    setInterval(refreshCSRFToken, 1800000);
+    
+    function refreshCSRFToken() {
+        fetch('/refresh-csrf')
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('input[name="_token"]').value = data.token;
+                document.querySelector('meta[name="csrf-token"]').content = data.token;
+            });
+    }
+});
+</script>
 <body>
     <div class="login-container">
         <h2 class="text-center mb-4">Iniciar Sesión</h2>
@@ -50,9 +65,10 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
+        <form method="POST" action="{{ route('login') }}"> 
+      @csrf
+    <!-- Agrega esto como respaldo -->
+    <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
             <div class="mb-3">
                 <label for="username" class="form-label">Nombre de usuario</label>
                 <input type="text" class="form-control" id="username" name="username" required placeholder="Ej: admin">
